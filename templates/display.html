@@ -2,13 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Display Page</h1>
-    <p>Selected Username: {{ username }}</p>
-    <p>Selected Course: {{ course }}</p>
-    <p>Selected Role: {{ role }}</p>
-    <p>Selected Location: {{ address }}</p>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-3/4">
+        <h1 class="text-2xl font-bold text-center text-purple-600 mb-4">User Information</h1>
+        <table class="min-w-full bg-white border border-purple-200 rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-purple-600 text-white">
+                    <th class="py-2 px-4 text-left">Field</th>
+                    <th class="py-2 px-4 text-left">Value</th>
+                </tr>
+            </thead>
+            <tbody id="userData" class="text-gray-700">
+                <!-- Table rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript to populate the table -->
+    <script>
+        // Fetch data from localStorage
+        const username = localStorage.getItem('username');
+        const course = localStorage.getItem('course');
+        const role = localStorage.getItem('role');
+        const location = localStorage.getItem('location');
+
+        // Populate table
+        const userData = [
+            { field: 'Username', value: username },
+            { field: 'Course', value: course },
+            { field: 'Role', value: role },
+            { field: 'Location', value: location }
+        ];
+
+        const tableBody = document.getElementById('userData');
+        userData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="py-2 px-4 border">${row.field}</td>
+                <td class="py-2 px-4 border">${row.value}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    </script>
 </body>
 </html>
