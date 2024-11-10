@@ -25,13 +25,13 @@ def course():
     user.usernameUpdate(username)
 
     if username in user_list: #if user exists
-        return redirect(url_for('display')) # go to display page, display user details 
+        return redirect(url_for('/display')) # go to display page, display user details 
 
     
 
     return render_template('course.html', username=username)
 
-@app.route('/display', methods=['POST','GET'])
+@app.route('/display', methods=['POST'])
 def display():
     #need to refresh location?
     #can we add a status button 

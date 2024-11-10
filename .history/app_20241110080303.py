@@ -31,7 +31,7 @@ def course():
 
     return render_template('course.html', username=username)
 
-@app.route('/display', methods=['POST','GET'])
+@app.route('/display', methods=['POST'])
 def display():
     #need to refresh location?
     #can we add a status button 

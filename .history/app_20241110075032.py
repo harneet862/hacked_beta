@@ -27,11 +27,11 @@ def course():
     if username in user_list: #if user exists
         return redirect(url_for('display')) # go to display page, display user details 
 
-    
+    user.usernameUpdate(username)
 
     return render_template('course.html', username=username)
 
-@app.route('/display', methods=['POST','GET'])
+@app.route('/display', methods=['POST'])
 def display():
     #need to refresh location?
     #can we add a status button 
@@ -48,7 +48,6 @@ def display():
     # print(f"Username: {username}")
     # print(f"Location Enabled: {location_enabled}")
     # print(f"Address: {address}")
-
     # Pass all variables to the template
     add_user(username, course, role, status,address)
     return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address)
