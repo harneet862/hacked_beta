@@ -100,6 +100,70 @@ body::before {
 .letter:nth-child(22) { animation-delay: 1.8s; }
 .letter:nth-child(23) { animation-delay: 1.9s; }
 .letter:nth-child(24) { animation-delay: 2s; }
+/* Center form on the page */
+.username-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Styling the input field */
+.username-form input {
+    width: 100%;
+    max-width: 350px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 2px solid #c2bce3;
+    border-radius: 50px;
+    outline: none;
+    text-align: center;
+    background-color: #f5f5ff;
+    color: #3b3a4f;
+    box-shadow: 0 8px 15px rgba(106, 103, 206, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.username-form input:focus {
+    border-color: #6A67CE;
+    box-shadow: 0 8px 20px rgba(106, 103, 206, 0.3);
+}
+
+.username-form input::placeholder {
+    color: #aaa;
+    opacity: 0.8;
+}
+
+/* Styling the button */
+.start-button {
+    background: linear-gradient(135deg, #9f90e9, #6a67ce);
+    color: white;
+    font-size: 1.4rem;
+    padding: 0.8rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(106, 103, 206, 0.3);
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+.start-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: linear-gradient(135deg, #6a67ce, #9f90e9);
+}
+
+.start-button:active {
+    transform: translateY(0);
+}
+
+/* Optional: Adding subtle shadow to the form container */
+.welcome {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+}
 
 /* Keyframes for fade-in animation */
 @keyframes fadeIn {
