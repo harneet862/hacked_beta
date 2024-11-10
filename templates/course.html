@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,11 +6,17 @@
     <title>Course Selection</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='styles/course.css') }}" rel="stylesheet">
+
+    <!-- Include Google Maps API (Geolocation & Geocoding) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxIzg-L-mZUSNs6rZJjL2nkMGZTmEAx5g&libraries=places"></script>
 </head>
 <body>
     <!-- Course Selection Section -->
     <header class="welcome">
-        <h1 class="welcome-message">Select Your Course & Role</h1>
+        <!-- Greeting Message -->
+        <h1 class="welcome-message">
+            Hello, {{ username }}! 👋
+        </h1>
 
         <!-- Form to select course and role -->
         <form id="course-form" method="POST" action="{{ url_for('display') }}" class="course-form">
@@ -36,9 +42,77 @@
                 </div>
             </div>
 
+            <!-- Location Toggle and Display -->
+            <div class="input-group">
+                <label for="location-toggle">Enable Location</label>
+                <input type="checkbox" id="location-toggle" onclick="toggleLocation()" />
+                <p id="location-output"></p>
+            </div>
+
             <!-- Submit Button -->
             <button type="submit" class="start-button">Proceed</button>
         </form>
     </header>
+
+    <script>
+        // Function to toggle location fetching with Google Maps API
+        function toggleLocation() {
+            if (document.getElementById('location-toggle').checked) {
+                getLocationFromGoogle();
+            } else {
+                document.getElementById("location-output").innerHTML = "Location disabled.";
+            }
+        }
+
+        // Function to get the user's location using Google Maps Geolocation API
+        function getLocationFromGoogle() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Function to display the location and fetch the address using the Google Geocoding API
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Call the Geocoding API to get the address
+            const geocoder = new google.maps.Geocoder();
+            const latLng = new google.maps.LatLng(latitude, longitude);
+
+            geocoder.geocode({ 'location': latLng }, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        // Only display the formatted address, no lat/long
+                        document.getElementById("location-output").innerHTML = "Address: " + results[0].formatted_address;
+                    } else {
+                        document.getElementById("location-output").innerHTML = "No address found.";
+                    }
+                } else {
+                    document.getElementById("location-output").innerHTML = "Geocoder failed due to: " + status;
+                }
+            });
+        }
+
+        // Function to handle errors
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById("location-output").innerHTML = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("location-output").innerHTML = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("location-output").innerHTML = "The request to get user location timed out.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    document.getElementById("location-output").innerHTML = "An unknown error occurred.";
+                    break;
+            }
+        }
+    </script>
 </body>
 </html>

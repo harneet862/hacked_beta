@@ -7,6 +7,7 @@ body {
     min-height: 100vh;
     background-color: #F3F4F6;
     margin: 0;
+    position: relative;
 }
 
 header.welcome {
@@ -43,16 +44,18 @@ header.welcome {
     margin-bottom: 1.5rem;
 }
 
+/* Make the following labels and their text larger */
 label {
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: #6A67CE;
+    font-size: 1.6rem; /* Increased font size */
 }
 
-/* Dropdown & Radio Inputs */
-select, input[type="radio"] {
-    font-size: 1.2rem;
+/* Adjust the font size for dropdowns and inputs */
+select {
+    font-size: 1.4rem; /* Increased font size */
     padding: 0.8rem;
     border: 2px solid #9F90E9;
     border-radius: 10px;
@@ -63,20 +66,41 @@ select, input[type="radio"] {
     color: #333;
 }
 
-select:focus {
-    border-color: #6A67CE;
+/* Adjust Radio Buttons font size */
+input[type="radio"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
-/* Role Options Styling */
+/* Role Options Styling - Increase font size for role options */
 .role-options {
     display: flex;
     gap: 2rem;
     justify-content: center;
+    font-size: 1.4rem; /* Larger font size for options */
 }
 
 .role-options label {
     font-weight: normal;
     color: #6A67CE;
+}
+
+/* Location Toggle Styling - Larger font size for the label */
+#location-toggle {
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Styling for the Address output - Larger font size */
+#location-output {
+    font-size: 1.6rem; /* Increased font size */
+    color: #6A67CE;
+    margin-top: 10px;
+    font-weight: normal;
+    text-align: center;
 }
 
 /* Submit Button Styling */
@@ -96,7 +120,7 @@ select:focus {
 
 .start-button:hover {
     background: linear-gradient(135deg, #9F90E9, #6A67CE);
-    transform: translateY(-2px);
+    transform: translateY(-5px) scale(1.05);
 }
 
 .start-button:active {
