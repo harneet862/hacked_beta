@@ -46,7 +46,7 @@ def get_users_by_course_role_and_status(course, role, status):
     connection, cursor = connect_db()
     cursor.execute('''
          SELECT * FROM users WHERE course = ? AND role like ? AND status = ?;
-    ''', (course, role,status))
+    ''', (course, role,'available'))
     #cursor.execute('''
     #   SELECT * FROM users WHERE course = ? AND role = ?;
     #''', (course, role))

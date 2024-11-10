@@ -46,7 +46,7 @@ def display():
     
     # Get matching users based on course, role, and status
     matches = get_users_by_course_role_and_status(course, role, status)
-    
+    print(matches)
     # Render the template with all the data
     return render_template('display.html', 
                            course=course, 

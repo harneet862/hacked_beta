@@ -15,7 +15,6 @@ INSERT INTO users (username, role, status, course, location) VALUES
 ('nina', 'study buddy', 'available', 'CMPUT 291', 'CCIS'),
 ('oliver', 'hangout', 'available', 'CMPUT 204', 'SUB'),
 ('peter', 'study buddy', 'available', 'MATH 214', 'NREF'),
-('quinn', 'hangout', 'busy', 'PHYS 124', 'Tory'),
 ('rachel', 'study buddy', 'available', 'CMPUT 267', 'Athabasca'),
 ('sam', 'study buddy', 'busy', 'CMPUT 204', 'ETLC'),
 ('tina', 'hangout', 'available', 'CMPUT 291', 'BioSci'),
