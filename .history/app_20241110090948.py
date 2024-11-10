@@ -31,30 +31,30 @@ def course():
 
 @app.route('/display', methods=['POST','GET'])
 def display():
-    # Retrieve form data
+    #need to refresh location?
+    #can we add a status button 
+
     course = request.form.get('course')
     role = request.form.get('role')
-    address = request.form.get('address')
-    
-    # Get user-specific data
-    username = user.returnUsername()  # Assuming you have a user object with methods
-    status = user.returnStatus()
+    username = user.returnUsername()
     location_enabled = 'Yes' if request.form.get('location-toggle') else 'No'
+    address = request.form.get('address') 
+    status = user.returnStatus()
+
+    # print(f"Course: {course}")
+    # print(f"Role: {role}")
+    # print(f"Username: {username}")
+    # print(f"Location Enabled: {location_enabled}")
+    # print(f"Address: {address}")
+    add_user(username, role, status, course,address)
+
+    # Pass all variables to the template
+    # matches = get_users_by_course_role_and_status(course, role,status)
     
-    # Add the user (assuming add_user() is a function that inserts into the database)
-    add_user(username, role, status, course, address)
-    
-    # Get matching users based on course, role, and status
-    matches = get_users_by_course_role_and_status(course, role, status)
-    
-    # Render the template with all the data
-    return render_template('display.html', 
-                           course=course, 
-                           role=role, 
-                           username=username, 
-                           location_enabled=location_enabled, 
-                           address=address, 
-                           matches=matches)
+    matches = get_users_by_course_role_and_status(course, role)
+    print(matches)
+    print(type(matches))
+    return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address,matches=matches)
 
 if __name__ == "__main__":
     app.run(debug=True)

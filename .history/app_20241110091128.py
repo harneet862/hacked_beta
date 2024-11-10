@@ -39,22 +39,17 @@ def display():
     # Get user-specific data
     username = user.returnUsername()  # Assuming you have a user object with methods
     status = user.returnStatus()
-    location_enabled = 'Yes' if request.form.get('location-toggle') else 'No'
-    
-    # Add the user (assuming add_user() is a function that inserts into the database)
-    add_user(username, role, status, course, address)
-    
-    # Get matching users based on course, role, and status
-    matches = get_users_by_course_role_and_status(course, role, status)
-    
-    # Render the template with all the data
-    return render_template('display.html', 
-                           course=course, 
-                           role=role, 
-                           username=username, 
-                           location_enabled=location_enabled, 
-                           address=address, 
-                           matches=matches)
+
+    # print(f"Course: {course}")
+    # print(f"Role: {role}")
+    # print(f"Username: {username}")
+    # print(f"Location Enabled: {location_enabled}")
+    # print(f"Address: {address}")
+    # Pass all variables to the template
+    # matches = get_users_by_course_role_and_status(course, role,status)
+    matches = get_users_by_course_role_and_status(course, role)
+    add_user(username, role, status, course,address)
+    return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address,matches=matches)
 
 if __name__ == "__main__":
     app.run(debug=True)
