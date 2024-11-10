@@ -26,8 +26,8 @@ def course():
     username = request.form.get('username')
     user.usernameUpdate(username)
 
-    # if username in user_list: #if user exists
-    #     return redirect(url_for('display')) # go to display page, display user details 
+    if username in user_list: #if user exists
+        return redirect(url_for('display')) # go to display page, display user details 
 
     return render_template('course.html', username=username)
 
