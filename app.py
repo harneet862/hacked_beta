@@ -49,8 +49,8 @@ def display():
     add_user(username, role, status, course, address)
     
     # Get matching users based on course, role, and status
-    matches = get_users_by_course_role_and_status(course, role, status)
-    
+    matches = get_users_by_course_role_and_status(course, role, 'available')
+    #print(matches)
     # Render the template with all the data
     return render_template('display.html', 
                            course=course, 

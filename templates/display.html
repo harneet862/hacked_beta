@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,6 +34,7 @@
         <table class="w-full border-collapse border border-gray-200">
             <thead>
                 <tr class="bg-purple-100 text-purple-700">
+                    <th class="border border-gray-200 p-3 text-left">Select</th>  <!-- New column for selection -->
                     <th class="border border-gray-200 p-3 text-left">Username</th>
                     <th class="border border-gray-200 p-3 text-left">Course</th>
                     <th class="border border-gray-200 p-3 text-left">Role</th>
@@ -41,40 +42,50 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Dynamic Table Rows -->
+                <!-- Loop through matches to display each user in the table -->
+                {% for match in matches %}
                 <tr class="hover:bg-gray-100">
-                    <td class="border border-gray-200 p-3" id="table-username">User</td>
-                    <td class="border border-gray-200 p-3" id="table-course">Not Assigned</td>
-                    <td class="border border-gray-200 p-3" id="table-role">Not Specified</td>
-                    <td class="border border-gray-200 p-3 text-green-600" id="table-status">Active</td>
+                    <td class="border border-gray-200 p-3">
+                        <!-- Radio button for selection, only one can be selected -->
+                        <input type="radio" name="user_selection" value="{{ match[0] }}" class="form-radio text-purple-600" onclick="toggleChatButton()">
+                    </td>
+                    <td class="border border-gray-200 p-3">{{ match[0] }}</td>
+                    <td class="border border-gray-200 p-3">{{ match[3] }}</td>
+                    <td class="border border-gray-200 p-3">{{ match[1] }}</td>
+                    <td class="border border-gray-200 p-3 text-green-600">{{ match[2] }}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <!-- JavaScript for Dynamic Content -->
+    <!-- Let's Chat Button (Initially Hidden) -->
+    <div class="max-w-5xl mx-auto mt-4 p-6">
+        <button id="chatButton" class="bg-purple-600 text-white py-2 px-6 rounded-lg hidden" onclick="startChat()">
+            Let's chat 💬
+        </button>
+    </div>
+
+    <!-- JavaScript to Show Button on Row Selection -->
     <script>
-        for match in matches
-        const userData = {
-            username: "John Doe",
-            course: "Web Development",
-            role: "Study Buddy",
-            status: "Active"
-        };
+        // Function to toggle the visibility of the chat button when a radio button is clicked
+        function toggleChatButton() {
+            const chatButton = document.getElementById('chatButton');
+            // Check if a radio button is selected
+            const selectedUser = document.querySelector('input[name="user_selection"]:checked');
+            
+            if (selectedUser) {
+                chatButton.classList.remove('hidden');  // Show the button
+            } else {
+                chatButton.classList.add('hidden');  // Hide the button if no user is selected
+            }
+        }
 
-        // Populate the top banner
-        document.getElementById('username').innerText = f("Time to find buddy, {{ username }}!🤝");
-        document.getElementById('course').innerText = f("Course: {{course}}");
-        document.getElementById('role').innerText = f("Role: {{role}}");
-
-        // Populate the table row
-        document.getElementById('table-username').innerText = userData.username;
-        document.getElementById('table-course').innerText = userData.course;
-        document.getElementById('table-role').innerText = userData.role;
-        document.getElementById('table-status').innerText = userData.status;
-
-        // Update status dropdown based on user status
-        document.getElementById('status').value = userData.status;
+        // Placeholder function for starting the chat
+        function startChat() {
+            alert("Starting chat...");
+            // Your logic for initiating the chat can go here
+        }
     </script>
 
 </body>

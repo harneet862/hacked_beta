@@ -3,9 +3,9 @@ import sqlite3
 def setup_db(path="./test.db"):
     connection = sqlite3.connect(path)
     cursor = connection.cursor()
-    cursor.execute('DROP TABLE IF EXISTS users;')
+    #cursor.execute('DROP TABLE IF EXISTS users;')
     cursor.execute('''
-        CREATE TABLE users (
+        CREATE TABLE IF NOT EXISTS users (
             username CHAR(30) PRIMARY KEY,
             role CHAR(20),
             status CHAR(20),
@@ -13,10 +13,10 @@ def setup_db(path="./test.db"):
             location CHAR(80)
         );
     ''')
-    cursor.execute('''
-            INSERT INTO users (username, role, status, course,location) 
-            VALUES (?, ?, ?, ?, ?);
-        ''', ("yellow","Study Buddy", None, "CMPUT 204", None ))
+    #cursor.execute('''
+    #        INSERT INTO users (username, role, status, course,location) 
+    #        VALUES (?, ?, ?, ?, ?);
+    #    ''', ("yellow","Study Buddy", None, "CMPUT 204", None ))
     connection.commit()
     return
 # Connect to the database
@@ -42,9 +42,10 @@ def add_user(username,role, status, course, location):
 
 # Function to retrieve users based on course and status
 def get_users_by_course_role_and_status(course, role, status):
+    print(course, role, status)
     connection, cursor = connect_db()
     cursor.execute('''
-         SELECT * FROM users WHERE course = ? AND role = ? AND status = ?;
+         SELECT * FROM users WHERE course = ? AND role like ? AND status = ?;
     ''', (course, role,status))
     #cursor.execute('''
     #   SELECT * FROM users WHERE course = ? AND role = ?;
