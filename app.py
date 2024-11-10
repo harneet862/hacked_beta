@@ -20,7 +20,6 @@ def index():
     return render_template('index.html')
  #flask knows to look for this
 
-
 # Course page (new route)
 @app.route("/course", methods=["POST", "GET"])
 def course():
