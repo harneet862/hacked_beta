@@ -7,7 +7,6 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #D9E4FF, #E4E7F5); /* Soft gradient background */
     color: #3B3A4F;
     display: flex;
     flex-direction: column;
@@ -15,10 +14,41 @@ body {
     justify-content: center;
     min-height: 100vh;
     padding: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Ripple effect background */
+body::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(106, 103, 206, 0.3), transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: ripple 5s infinite ease-in-out;
+    z-index: 0;
+}
+
+/* Keyframes for ripple animation */
+@keyframes ripple {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.6;
+    }
 }
 
 /* Welcome Section */
 .welcome {
+    position: relative;
+    z-index: 1;
     text-align: center;
     margin-bottom: 2rem;
     padding: 3rem;
@@ -26,8 +56,6 @@ body {
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-
-
 
 /* Optional: Add hover effect to make the box 'bounce' */
 .welcome:hover {
