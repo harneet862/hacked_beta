@@ -18,16 +18,11 @@ def index():
 @app.route("/course", methods=["POST", "GET"])
 def course():
     #do a check here if the user already exists in database. if the user exists, go straight to display page, with settings 
-    #user_list = get_all_usernames()
-    # print(user_list)
-    
+    user_list = get_all_rows()
+    print(user_list)
+
     username = request.form.get('username')
-
-    # if username in user_list: #if user exists
-    #     return redirect(url_for('display')) # go to display page, display user details 
-    # else:
-
-    #     user.usernameUpdate(username)
+    user.usernameUpdate(username)
 
     return render_template('course.html', username=username)
 
