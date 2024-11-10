@@ -100,7 +100,41 @@ body::before {
 .letter:nth-child(22) { animation-delay: 1.8s; }
 .letter:nth-child(23) { animation-delay: 1.9s; }
 .letter:nth-child(24) { animation-delay: 2s; }
+.username-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
 
+.username-form input {
+    width: 100%;
+    max-width: 300px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 2px solid #9F90E9;
+    border-radius: 50px;
+    outline: none;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 15px rgba(106, 103, 206, 0.2);
+    transition: border-color 0.3s ease;
+}
+
+.username-form input:focus {
+    border-color: #6A67CE;
+}
+
+.username-form input::placeholder {
+    color: #aaa;
+}
+
+.username-form button {
+    width: 100%;
+    max-width: 200px;
+    cursor: pointer;
+}
 /* Keyframes for fade-in animation */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
