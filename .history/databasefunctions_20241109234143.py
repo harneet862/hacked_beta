@@ -44,25 +44,3 @@ def get_users_by_course_role_and_status(course, role, status):
     results = cursor.fetchall()
     connection.close()
     return results
-
-
-
-def get_all_rows():
-    # Connect to the SQLite database
-
-    connection, cursor = connect_db()
-    
-    # Execute the SQL query to select all rows from the users table
-    cursor.execute('SELECT * FROM users')
-    
-    # Fetch all rows from the executed query
-    rows = cursor.fetchall()
-    
-    # Close the database connection
-    connection.close()
-    
-    # Return the list of rows
-    return rows
-
-# Example usage
-

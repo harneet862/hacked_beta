@@ -1,6 +1,6 @@
 from flask import Flask , render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from databasefunctions import *
+
 from user_class import User
 
 
@@ -14,7 +14,7 @@ user = User() #instance of user class
 
 app = Flask(__name__)
 
-@app.route('/', methods = ["POST", "GET"]) #home route 
+@app.route('/') #home route 
 
 def index():
     return render_template('index.html')
@@ -77,7 +77,6 @@ def location():
 # Display page
 @app.route("/display", methods=["GET"])
 def display():
-
     selected_course = user.returnCourse()
     selected_role = user.returnRole()
     selected_status = user.returnStatus()
