@@ -50,7 +50,6 @@ def display():
 
     # Pass all variables to the template
     # matches = get_users_by_course_role_and_status(course, role,status)
-    
     matches = get_users_by_course_role_and_status(course, role)
     print(matches)
     print(type(matches))

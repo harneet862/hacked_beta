@@ -24,8 +24,8 @@ def course():
     username = request.form.get('username')
     user.usernameUpdate(username)
 
-    if username in user_list: #if user exists
-        return redirect(url_for('display')) # go to display page, display user details 
+    # if username in user_list: #if user exists
+    #     return redirect(url_for('display')) # go to display page, display user details 
 
     return render_template('course.html', username=username)
 
@@ -41,19 +41,16 @@ def display():
     address = request.form.get('address') 
     status = user.returnStatus()
 
-    # print(f"Course: {course}")
-    # print(f"Role: {role}")
-    # print(f"Username: {username}")
-    # print(f"Location Enabled: {location_enabled}")
-    # print(f"Address: {address}")
-    add_user(username, role, status, course,address)
+    print(f"Course: {course}")
+    print(f"Role: {role}")
+    print(f"Username: {username}")
+    print(f"Location Enabled: {location_enabled}")
+    print(f"Address: {address}")
 
     # Pass all variables to the template
     # matches = get_users_by_course_role_and_status(course, role,status)
-    
     matches = get_users_by_course_role_and_status(course, role)
-    print(matches)
-    print(type(matches))
+    add_user(username, role, status, course,address)
     return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address,matches=matches)
 
 if __name__ == "__main__":

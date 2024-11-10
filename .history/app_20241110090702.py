@@ -50,10 +50,8 @@ def display():
 
     # Pass all variables to the template
     # matches = get_users_by_course_role_and_status(course, role,status)
-    
     matches = get_users_by_course_role_and_status(course, role)
     print(matches)
-    print(type(matches))
     return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address,matches=matches)
 
 if __name__ == "__main__":
