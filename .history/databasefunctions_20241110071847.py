@@ -47,12 +47,22 @@ def get_users_by_course_role_and_status(course, role, status):
 
 
 
-def get_all_usernames():
+def get_all_rows():
+    # Connect to the SQLite database
+
     connection, cursor = connect_db()
-    cursor.execute('SELECT username FROM users')
-    usernames = [row[0] for row in cursor.fetchall()]  # Extract usernames from the rows
+    
+    # Execute the SQL query to select all rows from the users table
+    cursor.execute('SELECT * FROM users')
+    
+    # Fetch all rows from the executed query
+    rows = cursor.fetchall()
+    
+    # Close the database connection
     connection.close()
-    return usernames
+    
+    # Return the list of rows
+    return rows
 
 def clear_users_table():
     connection, cursor = connect_db()
@@ -61,9 +71,3 @@ def clear_users_table():
     connection.close()
     print("All rows have been cleared from the users table.")
 
-def get_user_by_username(username):
-    connection, cursor = connect_db()
-    cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
-    user = cursor.fetchone()  # Fetch the single row matching the username
-    connection.close()
-    return user
