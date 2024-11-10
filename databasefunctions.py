@@ -41,14 +41,14 @@ def add_user(username,role, status, course, location):
         connection.close()
 
 # Function to retrieve users based on course and status
-def get_users_by_course_role_and_status(course, role):
+def get_users_by_course_role_and_status(course, role, status):
     connection, cursor = connect_db()
-    # cursor.execute('''
-    #     SELECT * FROM users WHERE course = ? AND role = ? AND status = ?;
-    # ''', (course, role,status))
     cursor.execute('''
-        SELECT * FROM users WHERE course = ? AND role = ?;
-    ''', (course, role))
+         SELECT * FROM users WHERE course = ? AND role = ? AND status = ?;
+    ''', (course, role,status))
+    #cursor.execute('''
+    #   SELECT * FROM users WHERE course = ? AND role = ?;
+    #''', (course, role))
     results = cursor.fetchall()
     connection.close()
     return results

@@ -3,50 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Page</title>
+    <title>User Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-3/4">
-        <h1 class="text-2xl font-bold text-center text-purple-600 mb-4">User Information</h1>
-        <table class="min-w-full bg-white border border-purple-200 rounded-lg overflow-hidden">
+<body class="bg-[#f5f3ff] min-h-screen">
+
+    <!-- Top Banner with Custom Hex Color -->
+    <div id="top-banner" style="background-color: #B4A8ED;" class="text-white p-6 shadow-lg">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div>
+                <!-- Dynamic Content -->
+                <h1 id="username" class="text-2xl font-bold">Time to find buddy, {{ username }}!🤝 </h1>
+                <p id="course" class="text-2xl font-bold">Course: {{course}}</p>
+                <p id="role" class="text-2xl font-bold">Role: {{role}} </p>
+            </div>
+            <!-- Status Dropdown -->
+            <div class="flex items-center space-x-2">
+                <label for="status" class="font-semibold">Status:</label>
+                <select id="status" class="text-purple-600 bg-white rounded-lg px-3 py-2 focus:outline-none">
+                    <option value="Active" selected>Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Body with Table -->
+    <div class="max-w-5xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+        <h2 class="text-xl font-semibold text-purple-600 mb-4">User Details</h2>
+        <table class="w-full border-collapse border border-gray-200">
             <thead>
-                <tr class="bg-purple-600 text-white">
-                    <th class="py-2 px-4 text-left">Field</th>
-                    <th class="py-2 px-4 text-left">Value</th>
+                <tr class="bg-purple-100 text-purple-700">
+                    <th class="border border-gray-200 p-3 text-left">Username</th>
+                    <th class="border border-gray-200 p-3 text-left">Course</th>
+                    <th class="border border-gray-200 p-3 text-left">Role</th>
+                    <th class="border border-gray-200 p-3 text-left">Status</th>
                 </tr>
             </thead>
-            <tbody id="userData" class="text-gray-700">
-                <!-- Table rows will be dynamically inserted here -->
+            <tbody>
+                <!-- Dynamic Table Rows -->
+                <tr class="hover:bg-gray-100">
+                    <td class="border border-gray-200 p-3" id="table-username">User</td>
+                    <td class="border border-gray-200 p-3" id="table-course">Not Assigned</td>
+                    <td class="border border-gray-200 p-3" id="table-role">Not Specified</td>
+                    <td class="border border-gray-200 p-3 text-green-600" id="table-status">Active</td>
+                </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- JavaScript to populate the table -->
+    <!-- JavaScript for Dynamic Content -->
     <script>
-        // Fetch data from localStorage
-        const username = localStorage.getItem('username');
-        const course = localStorage.getItem('course');
-        const role = localStorage.getItem('role');
-        const location = localStorage.getItem('location');
+        for match in matches
+        const userData = {
+            username: "John Doe",
+            course: "Web Development",
+            role: "Study Buddy",
+            status: "Active"
+        };
 
-        // Populate table
-        const userData = [
-            { field: 'Username', value: username },
-            { field: 'Course', value: course },
-            { field: 'Role', value: role },
-            { field: 'Location', value: location }
-        ];
+        // Populate the top banner
+        document.getElementById('username').innerText = f("Time to find buddy, {{ username }}!🤝");
+        document.getElementById('course').innerText = f("Course: {{course}}");
+        document.getElementById('role').innerText = f("Role: {{role}}");
 
-        const tableBody = document.getElementById('userData');
-        userData.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td class="py-2 px-4 border">${row.field}</td>
-                <td class="py-2 px-4 border">${row.value}</td>
-            `;
-            tableBody.appendChild(tr);
-        });
+        // Populate the table row
+        document.getElementById('table-username').innerText = userData.username;
+        document.getElementById('table-course').innerText = userData.course;
+        document.getElementById('table-role').innerText = userData.role;
+        document.getElementById('table-status').innerText = userData.status;
+
+        // Update status dropdown based on user status
+        document.getElementById('status').value = userData.status;
     </script>
+
 </body>
 </html>
