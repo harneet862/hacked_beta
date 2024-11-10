@@ -15,21 +15,20 @@ user = User() #instance of user class
 app = Flask(__name__)
 
 @app.route('/', methods = ["POST", "GET"]) #home route 
-
 def index():
     if request.method == 'POST':
         # Get the input value from the form
-        user_input = request.form['user_input']
-        return f"You entered: {user_input}"
-     
+        username = request.form.get('username')
+        if username:  # Check if a username was entered
+            return redirect(url_for('course', username=username))
     return render_template('index.html')
  #flask knows to look for this
 
 # Course page (new route)
 @app.route("/course", methods=["POST", "GET"])
 def course():
-    username = request.args.get('username')
-    print(f"Received username in course route: {username}")
+    username = request.form.get('username')
+    #print(f"Received username in course route: {username}")
     return render_template('course.html', username=username)
 
 @app.route('/display', methods=['POST'])
@@ -37,10 +36,16 @@ def display():
     # Retrieve the form data
     course = request.form.get('course')
     role = request.form.get('role')
+    username = request.form.get('username')
     location_enabled = 'Yes' if request.form.get('location-toggle') else 'No'
-
-    # Here you can process the data or pass it to the display page
-    return render_template('display.html', course=course, role=role, location_enabled=location_enabled)
+    address = request.form.get('address') 
+    print(f"Course: {course}")
+    print(f"Role: {role}")
+    print(f"Username: {username}")
+    print(f"Location Enabled: {location_enabled}")
+    print(f"Address: {address}")
+    # Pass all variables to the template
+    return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address)
 
 # Roles page
 @app.route("/roles", methods=["POST", "GET"])

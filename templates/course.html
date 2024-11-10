@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,26 +11,25 @@
     <!-- Include Google Maps API (Geolocation & Geocoding) -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxIzg-L-mZUSNs6rZJjL2nkMGZTmEAx5g&libraries=places"></script>
 </head>
+
 <body>
     <!-- Course Selection Section -->
     <header class="welcome">
         <!-- Greeting Message -->
-        <h1 class="welcome-message">
-            Hello, {{ username }}! 👋
-        </h1>
+        <h1 class="welcome-message">Hello, {{ username }}! 👋</h1>
 
-        <!-- Form to select course and role -->
+        <!-- Form to select course, role, and address -->
         <form id="course-form" method="POST" action="{{ url_for('display') }}" class="course-form">
             <!-- Dropdown for Course Selection -->
             <div class="input-group">
                 <label for="course">Choose your course:</label>
                 <select id="course" name="course" required>
                     <option value="" disabled selected>Select your course</option>
-                    <option value="Computer Science">CMPUT 291</option>
-                    <option value="Computer Science">CMPUT 204</option>
-                    <option value="Computer Science">CMPUT 267</option>
-                    <option value="Math">MATH 214</option>
-                    <option value="Physics">PHYS 124</option>
+                    <option value="CMPUT 291">CMPUT 291</option>
+                    <option value="CMPUT 204">CMPUT 204</option>
+                    <option value="CMPUT 267">CMPUT 267</option>
+                    <option value="Math 214">MATH 214</option>
+                    <option value="PHYS 124">PHYS 124</option>
                 </select>
             </div>
 
@@ -47,6 +47,8 @@
                 <label for="location-toggle">Enable Location</label>
                 <input type="checkbox" id="location-toggle" onclick="toggleLocation()" />
                 <p id="location-output"></p>
+                <!-- Hidden input to store the address -->
+                <input type="hidden" id="address" name="address">
             </div>
 
             <!-- Submit Button -->
@@ -61,6 +63,7 @@
                 getLocationFromGoogle();
             } else {
                 document.getElementById("location-output").innerHTML = "Location disabled.";
+                document.getElementById("address").value = "";
             }
         }
 
@@ -73,46 +76,49 @@
             }
         }
 
-        // Function to display the location and fetch the address using the Google Geocoding API
+        // Function to display the location and fetch the address using Google Maps Geocoding API
         function showPosition(position) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
-            // Call the Geocoding API to get the address
             const geocoder = new google.maps.Geocoder();
             const latLng = new google.maps.LatLng(latitude, longitude);
 
-            geocoder.geocode({ 'location': latLng }, function(results, status) {
-                if (status === 'OK') {
-                    if (results[0]) {
-                        // Only display the formatted address, no lat/long
-                        document.getElementById("location-output").innerHTML = "Address: " + results[0].formatted_address;
-                    } else {
-                        document.getElementById("location-output").innerHTML = "No address found.";
-                    }
+            geocoder.geocode({ 'location': latLng }, function (results, status) {
+                if (status === 'OK' && results[0]) {
+                    const address = results[0].formatted_address;
+                    document.getElementById("location-output").innerHTML = "Address: " + address;
+
+                    // Save the address to the hidden input field
+                    document.getElementById("address").value = address;
                 } else {
-                    document.getElementById("location-output").innerHTML = "Geocoder failed due to: " + status;
+                    document.getElementById("location-output").innerHTML = "No address found.";
+                    document.getElementById("address").value = "";
                 }
             });
         }
 
         // Function to handle errors
         function showError(error) {
+            let errorMessage = "";
             switch (error.code) {
                 case error.PERMISSION_DENIED:
-                    document.getElementById("location-output").innerHTML = "User denied the request for Geolocation.";
+                    errorMessage = "User denied the request for Geolocation.";
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    document.getElementById("location-output").innerHTML = "Location information is unavailable.";
+                    errorMessage = "Location information is unavailable.";
                     break;
                 case error.TIMEOUT:
-                    document.getElementById("location-output").innerHTML = "The request to get user location timed out.";
+                    errorMessage = "The request to get user location timed out.";
                     break;
                 case error.UNKNOWN_ERROR:
-                    document.getElementById("location-output").innerHTML = "An unknown error occurred.";
+                    errorMessage = "An unknown error occurred.";
                     break;
             }
+            document.getElementById("location-output").innerHTML = errorMessage;
+            document.getElementById("address").value = "";
         }
     </script>
 </body>
+
 </html>
