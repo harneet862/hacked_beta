@@ -1,46 +1,137 @@
-body {
-    font-family: Arial, sans-serif;
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    box-sizing: border-box;
 }
 
+/* Body and Fonts */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe6f0; /* Light pink background */
+    color: #4b0082; /* Indigo text color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header Styling */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1em 0;
+    width: 100%;
+    padding: 20px;
+    background-color: #6a0dad; /* Darker purple */
+    color: white;
     text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
 
 nav ul {
     list-style-type: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 1em;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 nav ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
 }
 
+nav ul li a:hover {
+    color: #d4a5f4; /* Lighter purple on hover */
+}
+
+/* Main Content Styling */
 main {
-    padding: 2em;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
 }
 
 section {
-    margin-bottom: 2em;
+    margin-bottom: 20px;
 }
 
+section h2 {
+    font-size: 2rem;
+    color: #4b0082; /* Indigo */
+    border-bottom: 2px solid #d4a5f4; /* Light purple */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #5a0e82; /* Slightly darker purple */
+}
+
+/* Forms and Buttons */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+button, select {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    color: white;
+    background-color: #8a2be2; /* Medium purple */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover, select:hover {
+    background-color: #6a0dad; /* Darker purple */
+}
+
+/* Footer Styling */
 footer {
-    background-color: #333;
-    color: #fff;
+    margin-top: auto;
+    padding: 10px;
+    background-color: #6a0dad; /* Darker purple */
+    color: white;
     text-align: center;
-    padding: 1em 0;
-    position: fixed;
+    font-size: 0.9rem;
     width: 100%;
-    bottom: 0;
+}
+
+/* Extra Styling for Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    main {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    nav ul li a {
+        font-size: 1rem;
+    }
 }
