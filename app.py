@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 @app.route('/') #home route 
 def index():
+    setup_db()
     return render_template('index.html')
  #flask knows to look for this
 
@@ -50,8 +51,10 @@ def display():
     # print(f"Address: {address}")
 
     # Pass all variables to the template
-    add_user(username, course, role, status,address)
-    return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address)
+    # matches = get_users_by_course_role_and_status(course, role,status)
+    matches = get_users_by_course_role_and_status(course, role)
+    add_user(username, role, status, course,address)
+    return render_template('display.html', course=course, role=role, username=username, location_enabled=location_enabled, address=address,matches=matches)
 
 if __name__ == "__main__":
     app.run(debug=True)

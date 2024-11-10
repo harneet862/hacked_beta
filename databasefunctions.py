@@ -6,13 +6,18 @@ def setup_db(path="./test.db"):
     cursor.execute('DROP TABLE IF EXISTS users;')
     cursor.execute('''
         CREATE TABLE users (
-            deviceID INT PRIMARY KEY,
-            username CHAR(30),
+            username CHAR(30) PRIMARY KEY,
             role CHAR(20),
             status CHAR(20),
-            course CHAR(40)
+            course CHAR(40),
+            location CHAR(80)
         );
     ''')
+    cursor.execute('''
+            INSERT INTO users (username, role, status, course,location) 
+            VALUES (?, ?, ?, ?, ?);
+        ''', ("yellow","Study Buddy", None, "CMPUT 204", None ))
+    connection.commit()
     return
 # Connect to the database
 def connect_db(path="./test.db"):
@@ -21,13 +26,13 @@ def connect_db(path="./test.db"):
     return connection, cursor
 
 # Function to add a new user row
-def add_user(username, course, role, status, location):
+def add_user(username,role, status, course, location):
     connection, cursor = connect_db()
     try:
         cursor.execute('''
-            INSERT INTO users (deviceID, username, role, status, course) 
+            INSERT INTO users (username, role, status, course,location) 
             VALUES (?, ?, ?, ?, ?);
-        ''', (username, course,role, status, location ))
+        ''', (username,role, status, course, location ))
         connection.commit()
         print("User added successfully.")
     except sqlite3.IntegrityError as e:
@@ -36,11 +41,14 @@ def add_user(username, course, role, status, location):
         connection.close()
 
 # Function to retrieve users based on course and status
-def get_users_by_course_role_and_status(course, role, status):
+def get_users_by_course_role_and_status(course, role):
     connection, cursor = connect_db()
+    # cursor.execute('''
+    #     SELECT * FROM users WHERE course = ? AND role = ? AND status = ?;
+    # ''', (course, role,status))
     cursor.execute('''
-        SELECT * FROM users WHERE course = ? AND role = ? AND status = ?;
-    ''', (course, role,status))
+        SELECT * FROM users WHERE course = ? AND role = ?;
+    ''', (course, role))
     results = cursor.fetchall()
     connection.close()
     return results
