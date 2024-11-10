@@ -10,13 +10,12 @@
 <body>
     <h1>Study Buddy App</h1>
     <p>Your System ID is: {{ system_id }}</p>
-
-
-   
-     <!-- Start button that leads to the course page -->
-    <form action="{{ url_for('course') }}" method="GET">
-        <button type="submit">Start</button>
-    </form>
+    <label for="dropdown">Choose a course:</label>
+    <select id="dropdown" name="dropdown">
+        {% for option in options %}
+            <option value="{{ option }}">{{ option }}</option>
+        {% endfor %}
+    </select>
 
 
 </body>
