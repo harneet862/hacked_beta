@@ -17,11 +17,6 @@ app = Flask(__name__)
 @app.route('/', methods = ["POST", "GET"]) #home route 
 
 def index():
-    if request.method == 'POST':
-        # Get the input value from the form
-        user_input = request.form['user_input']
-        return f"You entered: {user_input}"
-     
     return render_template('index.html')
  #flask knows to look for this
 
@@ -29,12 +24,12 @@ def index():
 @app.route("/course", methods=["POST", "GET"])
 def course():
     dropdown_options = get_courses()
-    '''if request.method == "POST":
+    if request.method == "POST":
         selected_course = request.form.get("dropdown")
 
         user.courseUpdate(selected_course)
 
-        return redirect(url_for("roles", course=selected_course))'''
+        return redirect(url_for("roles", course=selected_course))
     return render_template("course.html", options=dropdown_options)
 
 # Roles page

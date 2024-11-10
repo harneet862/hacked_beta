@@ -1,0 +1,104 @@
+/* General Page Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #F3F4F6;
+    margin: 0;
+}
+
+header.welcome {
+    text-align: center;
+    color: #6A67CE;
+    padding: 2rem;
+}
+
+/* Welcome Message */
+.welcome-message {
+    font-size: 2.5rem;
+    color: #6A67CE;
+    margin-bottom: 1rem;
+}
+
+/* Form Styling */
+.course-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Input Group Styling */
+.input-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #6A67CE;
+}
+
+/* Dropdown & Radio Inputs */
+select, input[type="radio"] {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    border: 2px solid #9F90E9;
+    border-radius: 10px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    background-color: #FFFFFF;
+    color: #333;
+}
+
+select:focus {
+    border-color: #6A67CE;
+}
+
+/* Role Options Styling */
+.role-options {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.role-options label {
+    font-weight: normal;
+    color: #6A67CE;
+}
+
+/* Submit Button Styling */
+.start-button {
+    background: linear-gradient(135deg, #6A67CE, #9F90E9);
+    color: white;
+    font-size: 1.4rem;
+    padding: 1rem 2.5rem;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 8px 15px rgba(106, 103, 206, 0.3);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.start-button:hover {
+    background: linear-gradient(135deg, #9F90E9, #6A67CE);
+    transform: translateY(-2px);
+}
+
+.start-button:active {
+    transform: translateY(1px);
+}

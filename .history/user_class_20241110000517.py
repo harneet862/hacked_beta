@@ -20,9 +20,6 @@ class User:
     def locationUpdate(self,location):
         self.location = location
 
-    def usernameUpdate(self,username):
-        self.username = username
-
     def returnCourse(self):
         return self.course
     
@@ -35,12 +32,7 @@ class User:
     def returnLocation(self):
         return self.location
     
-    def usernameUpdate(self):
-        return self.username
-    
-    
     def clear(self):
-        self.username = None
         self.course = None
         self.role = None
         self.status = None
