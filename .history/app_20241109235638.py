@@ -17,30 +17,20 @@ app = Flask(__name__)
 @app.route('/', methods = ["POST", "GET"]) #home route 
 
 def index():
-    if request.method == 'POST':
-        # Get the input value from the form
-        user_input = request.form['user_input']
-        return f"You entered: {user_input}"
-     
     return render_template('index.html')
  #flask knows to look for this
 
 # Course page (new route)
 @app.route("/course", methods=["POST", "GET"])
 def course():
-    username = request.args.get('username')
-    print(f"Received username in course route: {username}")
-    return render_template('course.html', username=username)
+    dropdown_options = get_courses()
+    if request.method == "POST":
+        selected_course = request.form.get("dropdown")
 
-@app.route('/display', methods=['POST'])
-def display():
-    # Retrieve the form data
-    course = request.form.get('course')
-    role = request.form.get('role')
-    location_enabled = 'Yes' if request.form.get('location-toggle') else 'No'
+        user.courseUpdate(selected_course)
 
-    # Here you can process the data or pass it to the display page
-    return render_template('display.html', course=course, role=role, location_enabled=location_enabled)
+        return redirect(url_for("roles", course=selected_course))
+    return render_template("course.html", options=dropdown_options)
 
 # Roles page
 @app.route("/roles", methods=["POST", "GET"])
@@ -84,7 +74,7 @@ def location():
         return redirect(url_for("display", course=selected_course, role=selected_role, status=selected_status, location=selected_location))
     return render_template("location.html", options=dropdown_options, selected_course=selected_course, selected_role=selected_role, selected_status=selected_status)
 
-'''# Display page
+# Display page
 @app.route("/display", methods=["GET"])
 def display():
 
@@ -92,7 +82,7 @@ def display():
     selected_role = user.returnRole()
     selected_status = user.returnStatus()
     selected_location = user.returnLocation()
-    return render_template("display.html", course=selected_course, role=selected_role, status=selected_status, location=selected_location)'''
+    return render_template("display.html", course=selected_course, role=selected_role, status=selected_status, location=selected_location)
 
 if __name__ == "__main__":
     app.run(debug=True)

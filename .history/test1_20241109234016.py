@@ -7,7 +7,4 @@ if __name__ == '__main__':
     for user in results:
         print(user)
     
-    all_users = get_all_rows()
-    for user in all_users:
-        print(user)
     
