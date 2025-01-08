@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
+    <link href="{{url_for('static', filename='/styles/letschat.css')}}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#f5f3ff] min-h-screen">
@@ -13,9 +14,16 @@
         <div class="max-w-5xl mx-auto flex justify-between items-center">
             <div>
                 <!-- Dynamic Content -->
-                <h1 id="username" class="text-2xl font-bold">Time to find buddy, {{ username }}!🤝 </h1>
-                <p id="course" class="text-2xl font-bold">Course: {{course}}</p>
-                <p id="role" class="text-2xl font-bold">Role: {{role}} </p>
+                <h1 id="username" class="text-3xl font-semibold text-white-800 mt-4 mb-2 text-center">
+                    Time to find buddy, {{ username }}!🤝
+                </h1>
+                <p id="course" class="text-xl font-medium text-white-600 mb-1">
+                    Course: {{course}}
+                </p>
+                <p id="role" class="text-xl font-medium text-white-600">
+                    Role: {{role}}
+                </p>
+                
             </div>
             <!-- Status Dropdown -->
             <div class="flex items-center space-x-2">
@@ -61,32 +69,33 @@
 
     <!-- Let's Chat Button (Initially Hidden) -->
     <div class="max-w-5xl mx-auto mt-4 p-6">
-        <button id="chatButton" class="bg-purple-600 text-white py-2 px-6 rounded-lg hidden" onclick="startChat()">
-            Let's chat 💬
+        <button 
+            id="chatButton" 
+            class="hidden start-button" 
+            onclick="startChat()">
+            Let's Chat 💬
         </button>
     </div>
-
     <!-- JavaScript to Show Button on Row Selection -->
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script>
-        // Function to toggle the visibility of the chat button when a radio button is clicked
-        function toggleChatButton() {
-            const chatButton = document.getElementById('chatButton');
-            // Check if a radio button is selected
-            const selectedUser = document.querySelector('input[name="user_selection"]:checked');
-            
-            if (selectedUser) {
-                chatButton.classList.remove('hidden');  // Show the button
-            } else {
-                chatButton.classList.add('hidden');  // Hide the button if no user is selected
-            }
+    function toggleChatButton() {
+        const chatButton = document.getElementById('chatButton');
+        const selectedUser = document.querySelector('input[name="user_selection"]:checked');
+        
+        // Show the button if a user is selected
+        if (selectedUser) {
+            chatButton.classList.remove('hidden'); // Show button
+        } else {
+            chatButton.classList.add('hidden'); // Hide button
         }
+    }
 
-        // Placeholder function for starting the chat
-        function startChat() {
-            alert("Starting chat...");
-            // Your logic for initiating the chat can go here
-        }
-    </script>
+    function startChat() {
+        alert("Let's chat with the selected buddy!");
+    }
+</script>
+
 
 </body>
 </html>
